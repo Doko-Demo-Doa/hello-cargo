@@ -1,23 +1,28 @@
-use std::io;
-use rand::Rng;
-use std::cmp::Ordering;
+extern crate gtk;
+extern crate gio;
+use gtk::prelude::*;
+use gio::prelude::*;
+use gtk::{Application, ApplicationWindow, Button};
 
 fn main() {
-  println!("Guess the number!");
-  println!("Please input your guess");
+  let application = Application::new(
+    Some("com.github.gtk-rs.examples.basic"),
+    Default::default(),
+  ).expect("failed to initialize GTK application");
 
-  let mut guess = String::new();
-  io::stdin().read_line(&mut guess).expect("Failed to read line");
-  let guess: u32 = guess.trim().parse().expect("Please type a number!");
+  application.connect_activate(|app| {
+    let window = ApplicationWindow::new(app);
+    window.set_title("Test GTK program");
+    window.set_default_size(350, 70);
 
-  println!("You guessed: {}", guess);
+    let button = Button::new_with_label("Click me!");
+    button.connect_clicked(|_| {
+      println!("Clicked");
+    });
 
-  let secret_number = rand::thread_rng().gen_range(1, 1000);
-  println!("The secret number is: {}", secret_number);
+    window.add(&button);
+    window.show_all();
+  });
 
-  match guess.cmp(&secret_number) {
-    Ordering::Less => println!("Too small!"),
-    Ordering::Greater => println!("Too big!"),
-    Ordering::Equal => println!("You win!"),
-  }
+  application.run(&[]);
 }
