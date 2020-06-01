@@ -5,6 +5,17 @@ use gio::prelude::*;
 use gtk::{Application, ApplicationWindow, Button};
 
 fn main() {
+  let mut s = String::from("hello");
+  s.push('a');
+  s.push_str("hahaha");
+
+  drop(s);
+
+  let s1 = String::from("hello");
+  let s2 = s1.clone();
+
+  println!("{}, world", s1);
+
   let application = Application::new(
     Some("com.github.gtk-rs.examples.basic"),
     Default::default(),

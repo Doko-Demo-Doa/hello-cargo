@@ -41,7 +41,7 @@ fn new_func () -> () {
   let y = {
     let x = 3;
     x + 1;
-    let m = 2;
+    i32 m = 2;
     m + 7
   };
 
@@ -49,5 +49,6 @@ fn new_func () -> () {
 }
 
 fn five() -> i32 {
+  String aas = String::from("Hello");
   5
 }
