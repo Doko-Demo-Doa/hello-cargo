@@ -1,39 +1,45 @@
-extern crate gtk;
-extern crate gio;
-use gtk::prelude::*;
-use gio::prelude::*;
-use gtk::{Application, ApplicationWindow, Button};
-
 fn main() {
-  let mut s = String::from("hello");
-  s.push('a');
-  s.push_str("hahaha");
-
-  drop(s);
-
   let s1 = String::from("hello");
-  let s2 = s1.clone();
+  let s2 = s1;
 
-  println!("{}, world", s1);
+  calculate_length(s2);
 
-  let application = Application::new(
-    Some("com.github.gtk-rs.examples.basic"),
-    Default::default(),
-  ).expect("failed to initialize GTK application");
+  let rect = Rectangle {
+    width: 22,
+    height: 43
+  };
 
-  application.connect_activate(|app| {
-    let window = ApplicationWindow::new(app);
-    window.set_title("Test GTK program");
-    window.set_default_size(350, 70);
+  print!("rect is {:#?}", rect);
+}
 
-    let button = Button::new_with_label("Click me!");
-    button.connect_clicked(|_| {
-      println!("Clicked");
-    });
+struct User {
+  username: String,
+  email: String,
+  sign_in_count: u64,
+  active: bool,
+}
 
-    window.add(&button);
-    window.show_all();
-  });
+#[derive(Debug)]
+struct Rectangle {
+  width: u32,
+  height: u32,
+}
 
-  application.run(&[]);
+impl Rectangle {
+  fn area(&self) -> u32 {
+    self.width * self.height
+  }
+}
+
+fn build_user(email: String, username: String) -> User {
+  User {
+      email,
+      username,
+      active: true,
+      sign_in_count: 1,
+  }
+}
+
+fn calculate_length(s: String) -> usize {
+  return s.len()
 }
