@@ -5,6 +5,8 @@ use std::io;
 fn main() {
   println!("Guess the number");
 
+  let a = "Test";
+
   let secret_number = rand::thread_rng().gen_range(0, 101);
   println!("The secret number is: {}", secret_number);
 
@@ -38,17 +40,11 @@ fn main() {
 
 fn new_func () -> () {
   let x = 5;
-  let y = {
-    let x = 3;
-    x + 1;
-    i32 m = 2;
-    m + 7
-  };
+  let y = 2;
+
+  if y > 2 {
+    let g = 23;
+  }
 
   println!("The value of y is: {}", y);
-}
-
-fn five() -> i32 {
-  String aas = String::from("Hello");
-  5
 }

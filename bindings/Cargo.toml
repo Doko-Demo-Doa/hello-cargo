@@ -1,14 +1,12 @@
 [package]
-name = "hello"
-version = "1.0.0"
+name = "message_box_bindings"
+version = "0.1.0"
 authors = ["Quan Pham <doraemonfanclub@gmail.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = "0.4.0"
-bindings = {package = "message_box_bindings", path = "bindings"}
-
-[lib]
-crate-type = ["dylib"]
+windows = "0.9.1"
+[build-dependencies]
+windows = "0.9.1"

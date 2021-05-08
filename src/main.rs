@@ -1,39 +1,27 @@
-extern crate gtk;
-extern crate gio;
-use gtk::prelude::*;
-use gio::prelude::*;
-use gtk::{Application, ApplicationWindow, Button};
+mod lib;
+use crate::lib::lib_test;
+
+use bindings::Windows::Win32::WindowsAndMessaging::{MessageBoxA, MESSAGEBOX_STYLE};
 
 fn main() {
-  let mut s = String::from("hello");
-  s.push('a');
-  s.push_str("hahaha");
+  let a = "Test";
+  let b: &str = "haha";
+  lib_test();
+  drop(a);
 
-  drop(s);
+  println!("{}", triangle_area(2, 6, 7, 4, 12, 65));
 
-  let s1 = String::from("hello");
-  let s2 = s1.clone();
+  show();
+}
 
-  println!("{}, world", s1);
+// Tính diện tích
+fn triangle_area(x1: i32, y1: i32, x2: i32, y2: i32, x3: i32, y3: i32) -> i32 {
+  let first = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2);
+  first / 2
+}
 
-  let application = Application::new(
-    Some("com.github.gtk-rs.examples.basic"),
-    Default::default(),
-  ).expect("failed to initialize GTK application");
-
-  application.connect_activate(|app| {
-    let window = ApplicationWindow::new(app);
-    window.set_title("Test GTK program");
-    window.set_default_size(350, 70);
-
-    let button = Button::new_with_label("Click me!");
-    button.connect_clicked(|_| {
-      println!("Clicked");
-    });
-
-    window.add(&button);
-    window.show_all();
-  });
-
-  application.run(&[]);
+fn show() {
+  unsafe {
+    MessageBoxA(None, "Hello", "Test", MESSAGEBOX_STYLE::MB_OK);
+  }
 }
